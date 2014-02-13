@@ -15,8 +15,6 @@ public class HelloController {
 	}
 }
 
-// TODO:  Commit to GitHub
-// TODO:  Add file upload
 // TODO:  Add service class for parsing
 // TODO:  Parse XML file
 // TODO:  Render results of single file to page
