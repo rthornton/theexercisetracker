@@ -1,6 +1,8 @@
 package com.theexercisetracker.mvc;
 
 import com.theexercisetracker.mvc.utils.AjaxUtils;
+import com.theexercisetracker.tcx.TcxParser;
+import com.theexercisetracker.tcx.TcxParserImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +29,8 @@ public class FileUploadController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void processUpload(@RequestParam MultipartFile file, Model model) throws IOException {
+        TcxParser parser = new TcxParserImpl();
+
         model.addAttribute("message", "File '" + file.getOriginalFilename() + "' uploaded successfully");
     }
 
