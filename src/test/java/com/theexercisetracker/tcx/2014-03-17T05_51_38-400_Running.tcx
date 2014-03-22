@@ -13,7 +13,7 @@
             <Id>2014-03-17T09:51:38Z</Id>
             <Lap StartTime="2014-03-17T09:51:38Z">
                 <TotalTimeSeconds>594</TotalTimeSeconds>
-                <DistanceMeters>1609.267700</DistanceMeters>
+                <DistanceMeters>1609.267700</DistanceMeters> // 11842.124878
                 <Calories>141</Calories>
                 <Intensity>Active</Intensity>
                 <TriggerMethod>Manual</TriggerMethod>
@@ -1481,7 +1481,7 @@
             </Lap>
             <Lap StartTime="2014-03-17T10:04:47Z">
                 <TotalTimeSeconds>568</TotalTimeSeconds>
-                <DistanceMeters>1598.419678</DistanceMeters>
+                <DistanceMeters>1598.419678</DistanceMeters> /// 10232.867178
                 <Calories>141</Calories>
                 <Intensity>Active</Intensity>
                 <TriggerMethod>Manual</TriggerMethod>
@@ -2918,7 +2918,7 @@
             </Lap>
             <Lap StartTime="2014-03-17T10:14:15Z">
                 <TotalTimeSeconds>560</TotalTimeSeconds>
-                <DistanceMeters>1605.883789</DistanceMeters>
+                <DistanceMeters>1605.883789</DistanceMeters> // 8634.4375
                 <Calories>141</Calories>
                 <Intensity>Active</Intensity>
                 <TriggerMethod>Manual</TriggerMethod>
@@ -4341,7 +4341,7 @@
             </Lap>
             <Lap StartTime="2014-03-17T10:23:35Z">
                 <TotalTimeSeconds>558</TotalTimeSeconds>
-                <DistanceMeters>1609.730957</DistanceMeters>
+                <DistanceMeters>1609.730957</DistanceMeters> // 7028.553711
                 <Calories>138</Calories>
                 <Intensity>Active</Intensity>
                 <TriggerMethod>Manual</TriggerMethod>
@@ -5750,7 +5750,7 @@
             </Lap>
             <Lap StartTime="2014-03-17T10:32:53Z">
                 <TotalTimeSeconds>573</TotalTimeSeconds>
-                <DistanceMeters>1593.818848</DistanceMeters>
+                <DistanceMeters>1593.818848</DistanceMeters> // 5418.822754
                 <Calories>139</Calories>
                 <Intensity>Active</Intensity>
                 <TriggerMethod>Manual</TriggerMethod>
