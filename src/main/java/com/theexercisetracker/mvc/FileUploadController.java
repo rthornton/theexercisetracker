@@ -1,6 +1,7 @@
 package com.theexercisetracker.mvc;
 
 import com.theexercisetracker.mvc.utils.AjaxUtils;
+import com.theexercisetracker.tcx.Tcx;
 import com.theexercisetracker.tcx.TcxParser;
 import com.theexercisetracker.tcx.TcxParserImpl;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 @Controller
@@ -28,10 +30,12 @@ public class FileUploadController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void processUpload(@RequestParam MultipartFile file, Model model) throws IOException {
+    public void processUpload(@RequestParam MultipartFile file, Model model) throws IOException, JAXBException {
         TcxParser parser = new TcxParserImpl();
+        Tcx tcx = parser.loadCoreValues(file.getInputStream(), TcxParser.ActivityTypes.RUNNING);
 
         model.addAttribute("message", "File '" + file.getOriginalFilename() + "' uploaded successfully");
+        model.addAttribute("message", "Total distance '" + tcx.getDistanceInMeters());
     }
 
 }

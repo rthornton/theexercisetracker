@@ -7,18 +7,21 @@ import javax.xml.bind.JAXBException;
 import java.io.InputStream;
 import java.util.List;
 
-/**
- * Created by rob on 3/17/14.
- */
 public interface TcxParser {
+
+    enum ActivityTypes {
+        RUNNING
+    }
+
     TrainingCenterDatabaseT initialize(InputStream is) throws JAXBException;
 
     List<ActivityT> loadRunningActivities(TrainingCenterDatabaseT db);
 
-    double getDistanceInMeters(ActivityT runningActivity);
+    double getDistanceInMeters(ActivityT activity);
 
-    double getTotalTimeInSeconds(ActivityT runningActivity);
+    double getTotalTimeInSeconds(ActivityT activity);
 
     int getTotalCaloriesBurned(ActivityT activity);
 
-    }
+    Tcx loadCoreValues(InputStream tcxFile, ActivityTypes activityType) throws JAXBException;
+}

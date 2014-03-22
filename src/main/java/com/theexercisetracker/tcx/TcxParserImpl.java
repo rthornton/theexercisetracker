@@ -14,9 +14,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by rob on 3/17/14.
- */
 public class TcxParserImpl implements TcxParser {
 
     @Override
@@ -68,5 +65,21 @@ public class TcxParserImpl implements TcxParser {
             calories += lap.getCalories();
         }
         return calories;
+    }
+
+    @Override
+    public Tcx loadCoreValues(InputStream tcxFile, ActivityTypes activityType) throws JAXBException {
+        TrainingCenterDatabaseT db = initialize(tcxFile);
+        if (activityType == ActivityTypes.RUNNING) {
+            List<ActivityT> runningActivities = loadRunningActivities(db);
+            assert (runningActivities.size() == 1);
+            Tcx coreValues = new Tcx();
+            coreValues.setDistanceInMeters(getDistanceInMeters(runningActivities.get(0)));
+            coreValues.setTotalTimeInSeconds(getTotalTimeInSeconds(runningActivities.get(0)));
+            coreValues.setTotalCaloriesBurned(getTotalCaloriesBurned(runningActivities.get(0)));
+            return coreValues;
+        } else {
+            throw new UnsupportedOperationException("Bad Activity Type");
+        }
     }
 }

@@ -72,6 +72,15 @@ public class TcxParserTest {
         Assert.assertEquals(1039, calories);
     }
 
+    @Test
+    public void loadCoreDataValues() throws FileNotFoundException, JAXBException {
+        TcxParserImpl tcxParser = new TcxParserImpl();
+        Tcx coreValues = tcxParser.loadCoreValues(new FileInputStream("com/theexercisetracker/tcx/2014-03-17T05_51_38-400_Running.tcx"), TcxParser.ActivityTypes.RUNNING);
+        Assert.assertEquals(1039, coreValues.getTotalCaloriesBurned());
+        Assert.assertEquals(4194, coreValues.getTotalTimeInSeconds(), 0.01);
+        Assert.assertEquals(11842.124878, coreValues.getDistanceInMeters(), 0.0000001);
+    }
+
 //    <Activities>
 //    <Activity Sport="Running">
 //    <Notes>Legs still a bit tired from Saturday. Light dusting of snow. Chilly.</Notes>
