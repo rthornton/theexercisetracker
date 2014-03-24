@@ -1,6 +1,16 @@
-package com.theexercisetracker.tcx;
+package com.theexercisetracker.persistence;
 
-public class Tcx {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Activity {
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
     private double distanceInMeters;
     private double totalTimeInSeconds;
     private int totalCaloriesBurned;

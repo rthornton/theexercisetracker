@@ -2,6 +2,7 @@ package com.theexercisetracker.tcx;
 
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.ActivityT;
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.TrainingCenterDatabaseT;
+import com.theexercisetracker.persistence.Activity;
 
 import javax.xml.bind.JAXBException;
 import java.io.InputStream;
@@ -23,5 +24,5 @@ public interface TcxParser {
 
     int getTotalCaloriesBurned(ActivityT activity);
 
-    Tcx loadCoreValues(InputStream tcxFile, ActivityTypes activityType) throws JAXBException;
+    Activity loadCoreValues(InputStream tcxFile, ActivityTypes activityType) throws JAXBException;
 }

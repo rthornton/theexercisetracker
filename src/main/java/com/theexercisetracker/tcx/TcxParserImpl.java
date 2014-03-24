@@ -3,6 +3,7 @@ package com.theexercisetracker.tcx;
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.ActivityLapT;
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.ActivityT;
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.TrainingCenterDatabaseT;
+import com.theexercisetracker.persistence.Activity;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -68,12 +69,12 @@ public class TcxParserImpl implements TcxParser {
     }
 
     @Override
-    public Tcx loadCoreValues(InputStream tcxFile, ActivityTypes activityType) throws JAXBException {
+    public Activity loadCoreValues(InputStream tcxFile, ActivityTypes activityType) throws JAXBException {
         TrainingCenterDatabaseT db = initialize(tcxFile);
         if (activityType == ActivityTypes.RUNNING) {
             List<ActivityT> runningActivities = loadRunningActivities(db);
             assert (runningActivities.size() == 1);
-            Tcx coreValues = new Tcx();
+            Activity coreValues = new Activity();
             coreValues.setDistanceInMeters(getDistanceInMeters(runningActivities.get(0)));
             coreValues.setTotalTimeInSeconds(getTotalTimeInSeconds(runningActivities.get(0)));
             coreValues.setTotalCaloriesBurned(getTotalCaloriesBurned(runningActivities.get(0)));

@@ -3,6 +3,7 @@ package com.theexercisetracker.tcx;
 
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.ActivityT;
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.TrainingCenterDatabaseT;
+import com.theexercisetracker.persistence.Activity;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -75,7 +76,7 @@ public class TcxParserTest {
     @Test
     public void loadCoreDataValues() throws FileNotFoundException, JAXBException {
         TcxParserImpl tcxParser = new TcxParserImpl();
-        Tcx coreValues = tcxParser.loadCoreValues(new FileInputStream("com/theexercisetracker/tcx/2014-03-17T05_51_38-400_Running.tcx"), TcxParser.ActivityTypes.RUNNING);
+        Activity coreValues = tcxParser.loadCoreValues(new FileInputStream("com/theexercisetracker/tcx/2014-03-17T05_51_38-400_Running.tcx"), TcxParser.ActivityTypes.RUNNING);
         Assert.assertEquals(1039, coreValues.getTotalCaloriesBurned());
         Assert.assertEquals(4194, coreValues.getTotalTimeInSeconds(), 0.01);
         Assert.assertEquals(11842.124878, coreValues.getDistanceInMeters(), 0.0000001);
