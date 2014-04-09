@@ -2,7 +2,7 @@ package com.theexercisetracker.tcx;
 
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.ActivityT;
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.TrainingCenterDatabaseT;
-import com.theexercisetracker.persistence.Activity;
+import com.theexercisetracker.persistence.model.Activity;
 
 import javax.xml.bind.JAXBException;
 import java.io.InputStream;

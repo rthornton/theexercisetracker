@@ -3,7 +3,7 @@ package com.theexercisetracker.tcx;
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.ActivityLapT;
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.ActivityT;
 import com.garmin.xmlschemas.trainingcenterdatabase.v2.TrainingCenterDatabaseT;
-import com.theexercisetracker.persistence.Activity;
+import com.theexercisetracker.persistence.model.Activity;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -78,6 +78,7 @@ public class TcxParserImpl implements TcxParser {
             coreValues.setDistanceInMeters(getDistanceInMeters(runningActivities.get(0)));
             coreValues.setTotalTimeInSeconds(getTotalTimeInSeconds(runningActivities.get(0)));
             coreValues.setTotalCaloriesBurned(getTotalCaloriesBurned(runningActivities.get(0)));
+            coreValues.setIdAsString(runningActivities.get(0).getId().toString());
             return coreValues;
         } else {
             throw new UnsupportedOperationException("Bad Activity Type");

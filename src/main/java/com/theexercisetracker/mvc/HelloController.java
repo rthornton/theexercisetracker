@@ -15,10 +15,8 @@ public class HelloController {
 	}
 }
 
+// TODO:  CRUDRepository vs extend SimpleJPARepository
 // TODO:  Add service class for parsing
-// TODO:  Parse XML file
 // TODO:  Render results of single file to page
-// TODO:  Add database
 // TODO:  Design database
-// TODO:  Commit activity to DB
 // TODO:  Add page showing aggregate information

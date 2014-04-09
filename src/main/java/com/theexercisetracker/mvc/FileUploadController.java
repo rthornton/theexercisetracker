@@ -1,7 +1,7 @@
 package com.theexercisetracker.mvc;
 
 import com.theexercisetracker.mvc.utils.AjaxUtils;
-//import com.theexercisetracker.persistence.Activity;
+//import com.theexercisetracker.persistence.model.Activity;
 //import com.theexercisetracker.tcx.TcxParser;
 //import com.theexercisetracker.tcx.TcxParserImpl;
 import org.springframework.stereotype.Controller;
