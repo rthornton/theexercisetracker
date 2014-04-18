@@ -3,13 +3,16 @@ package com.theexercisetracker.persistence;
 import com.theexercisetracker.persistence.model.Activity;
 import com.theexercisetracker.persistence.repositories.ActivityRepository;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -22,6 +25,11 @@ public class JPATests {
 
     @Autowired
     ActivityRepository repository;
+
+    @Before
+    public void clearRepository() {
+        repository.deleteAll();
+    }
 
     @Test
     public void doesJPAWork() {
@@ -49,24 +57,44 @@ public class JPATests {
 
     // TODO:  Read how to do dates - what class should Activity.getDate return?
     @Test
-    public void loadActivitiesSortedByDate() {
-        Activity activity = new Activity();
-        activity.setIdAsString("123123");
-        activity = repository.save(activity);
+    public void returningSortedActivitiesWorks() {
+        Activity activity1 = new Activity();
+        activity1.setIdAsString("123123");
+        activity1.setDistanceInMeters(10);
+        activity1 = repository.save(activity1);
 
         Activity activity2 = new Activity();
-        activity2.setIdAsString("234234");
+        activity2.setIdAsString("0234234");
+        activity2.setDistanceInMeters(11);
         activity2 = repository.save(activity2);
 
         Activity activity3 = new Activity();
         activity3.setIdAsString("345345");
+        activity3.setDistanceInMeters(9);
         activity3 = repository.save(activity3);
 
-        List<Activity> result = repository.findAllSortedByDate();
-        assertThat(result.size(), is(3));
-        assertThat(result, hasItem(activity));
-        assertThat(result, hasItem(activity2));
-        assertThat(result, hasItem(activity3));
-        Assert.assertEquals(activity2, result.get(0));
+        Sort sort = new Sort("idAsString");
+        Iterable<Activity> result = repository.findAll(sort);
+        Iterator iter = result.iterator();
+        Assert.assertEquals(iter.next(), activity2);
+        Assert.assertEquals(iter.next(), activity1);
+        Assert.assertEquals(iter.next(), activity3);
+        Assert.assertFalse(iter.hasNext());
+
+        sort = new Sort("distanceInMeters");
+        result = repository.findAll(sort);
+        iter = result.iterator();
+        Assert.assertEquals(iter.next(), activity3);
+        Assert.assertEquals(iter.next(), activity1);
+        Assert.assertEquals(iter.next(), activity2);
+        Assert.assertFalse(iter.hasNext());
+
+        sort = new Sort(Sort.Direction.DESC, "distanceInMeters");
+        result = repository.findAll(sort);
+        iter = result.iterator();
+        Assert.assertEquals(iter.next(), activity2);
+        Assert.assertEquals(iter.next(), activity1);
+        Assert.assertEquals(iter.next(), activity3);
+        Assert.assertFalse(iter.hasNext());
     }
 }
