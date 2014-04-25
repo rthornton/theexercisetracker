@@ -86,6 +86,7 @@ public class TcxParserTest {
         Assert.assertEquals(4194, coreValues.getTotalTimeInSeconds(), 0.01);
         Assert.assertEquals(11842.124878, coreValues.getDistanceInMeters(), 0.0000001);
         Assert.assertEquals("2014-03-17T09:51:38Z", coreValues.getIdAsString());
+        Assert.assertEquals(ZonedDateTime.parse("2014-03-17T09:51:38Z[GMT]"), coreValues.getStartTime());
     }
 
     @Test
@@ -98,8 +99,14 @@ public class TcxParserTest {
         System.out.println("zonedDateTime.toString() = " + zonedDateTime.toString());
         System.out.println("zonedDateTime = " + zonedDateTime.getZone().toString());
         System.out.println(zonedDateTime.toLocalDateTime().toString());
-        System.out.println("zonedDateTime = " + zonedDateTime.withZoneSameLocal(ZoneId.of("America/New_York")));
-        System.out.println("zonedDateTime = " + zonedDateTime.withZoneSameInstant(ZoneId.of("America/New_York")));
+        System.out.println("zonedDateTime.withZoneSameLocal = " + zonedDateTime.withZoneSameLocal(ZoneId.of("America/New_York")));
+        System.out.println("zonedDateTime.withZoneSameInstant = " + zonedDateTime.withZoneSameInstant(ZoneId.of("America/New_York")));
+        System.out.println("zonedDateTime = " + zonedDateTime.getYear());
+        System.out.println("zonedDateTime = " + zonedDateTime.getMonth());
+        System.out.println("zonedDateTime = " + zonedDateTime.getDayOfMonth());
+        System.out.println("zonedDateTime = " + zonedDateTime.getHour());
+        System.out.println("zonedDateTime = " + zonedDateTime.getMinute());
+        System.out.println("zonedDateTime = " + zonedDateTime.getSecond());
     }
 
 //    <Activities>

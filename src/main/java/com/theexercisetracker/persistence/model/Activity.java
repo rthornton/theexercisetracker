@@ -3,7 +3,8 @@ package com.theexercisetracker.persistence.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 public class Activity {
@@ -16,6 +17,7 @@ public class Activity {
     private double totalTimeInSeconds;
     private int totalCaloriesBurned;
     private String idAsString;
+    private ZonedDateTime startTime;
 
     public void setDistanceInMeters(double distanceInMeters) {
         this.distanceInMeters = distanceInMeters;
@@ -57,10 +59,6 @@ public class Activity {
         this.idAsString = idAsString;
     }
 
-    public Date getIdAsDate() {
-        return new Date();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,5 +85,13 @@ public class Activity {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + totalCaloriesBurned;
         return result;
+    }
+
+    public ZonedDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(ZonedDateTime startTime) {
+        this.startTime = startTime;
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -55,7 +57,35 @@ public class JPATests {
         assertThat(result, hasItem(activity2));
     }
 
-    // TODO:  Read how to do dates - what class should Activity.getDate return?
+    @Test
+    public void returnActivitiesSortedByZonedDateTime() {
+        Activity activity1 = new Activity();
+        activity1.setIdAsString("123123");
+        activity1.setDistanceInMeters(10);
+        activity1.setStartTime(ZonedDateTime.of(2014, 1, 1, 10, 0, 0, 0, ZoneId.of("GMT")));
+        activity1 = repository.save(activity1);
+
+        Activity activity2 = new Activity();
+        activity2.setIdAsString("0234234");
+        activity2.setDistanceInMeters(11);
+        activity2.setStartTime(ZonedDateTime.of(2014, 1, 2, 10, 0, 0, 0, ZoneId.of("GMT")));
+        activity2 = repository.save(activity2);
+
+        Activity activity3 = new Activity();
+        activity3.setIdAsString("345345");
+        activity3.setDistanceInMeters(9);
+        activity3.setStartTime(ZonedDateTime.of(2014, 1, 1, 10, 0, 1, 0, ZoneId.of("GMT")));
+        activity3 = repository.save(activity3);
+
+        Sort sort = new Sort("startTime");
+        Iterable<Activity> result = repository.findAll(sort);
+        Iterator iter = result.iterator();
+        Assert.assertEquals(iter.next(), activity1);
+        Assert.assertEquals(iter.next(), activity3);
+        Assert.assertEquals(iter.next(), activity2);
+        Assert.assertFalse(iter.hasNext());
+    }
+
     @Test
     public void returningSortedActivitiesWorks() {
         Activity activity1 = new Activity();

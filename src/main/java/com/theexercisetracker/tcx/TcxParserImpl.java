@@ -79,6 +79,7 @@ public class TcxParserImpl implements TcxParser {
             coreValues.setTotalTimeInSeconds(getTotalTimeInSeconds(runningActivities.get(0)));
             coreValues.setTotalCaloriesBurned(getTotalCaloriesBurned(runningActivities.get(0)));
             coreValues.setIdAsString(runningActivities.get(0).getId().toString());
+            coreValues.setStartTime(runningActivities.get(0).getId().toGregorianCalendar().toZonedDateTime());
             return coreValues;
         } else {
             throw new UnsupportedOperationException("Bad Activity Type");
