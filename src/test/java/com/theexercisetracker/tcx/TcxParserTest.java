@@ -14,10 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.*;
 
 public class TcxParserTest {
 
@@ -107,6 +104,27 @@ public class TcxParserTest {
         System.out.println("zonedDateTime = " + zonedDateTime.getHour());
         System.out.println("zonedDateTime = " + zonedDateTime.getMinute());
         System.out.println("zonedDateTime = " + zonedDateTime.getSecond());
+    }
+
+    @Test
+    public void sortZonedDateTimeObjects() {
+        ZonedDateTime zdt1 = ZonedDateTime.of(2014, 1, 1, 1, 1, 1, 1, ZoneId.systemDefault());
+        ZonedDateTime zdt2 = ZonedDateTime.of(2014, 1, 2, 1, 1, 1, 1, ZoneId.systemDefault());
+        ZonedDateTime zdt3 = ZonedDateTime.of(2014, 1, 3, 1, 1, 1, 1, ZoneId.systemDefault());
+
+        List zdts = new ArrayList<ZonedDateTime>();
+        zdts.add(zdt3);
+        zdts.add(zdt2);
+        zdts.add(zdt1);
+
+        Assert.assertEquals(zdt3, zdts.get(0));
+        Assert.assertEquals(zdt2, zdts.get(1));
+        Assert.assertEquals(zdt1, zdts.get(2));
+        Collections.sort(zdts);
+        Assert.assertEquals(zdt1, zdts.get(0));
+        Assert.assertEquals(zdt2, zdts.get(1));
+        Assert.assertEquals(zdt3, zdts.get(2));
+
     }
 
 //    <Activities>

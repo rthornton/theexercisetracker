@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -62,20 +63,32 @@ public class JPATests {
         Activity activity1 = new Activity();
         activity1.setIdAsString("123123");
         activity1.setDistanceInMeters(10);
-        activity1.setStartTime(ZonedDateTime.of(2014, 1, 1, 10, 0, 0, 0, ZoneId.of("GMT")));
+        ZonedDateTime zdt1 = ZonedDateTime.of(2014, 1, 1, 10, 0, 0, 0, ZoneId.of("GMT"));
+        activity1.setStartTime(zdt1);
         activity1 = repository.save(activity1);
 
         Activity activity2 = new Activity();
         activity2.setIdAsString("0234234");
         activity2.setDistanceInMeters(11);
-        activity2.setStartTime(ZonedDateTime.of(2014, 1, 2, 10, 0, 0, 0, ZoneId.of("GMT")));
+        ZonedDateTime zdt2 = ZonedDateTime.of(2014, 1, 2, 10, 0, 0, 0, ZoneId.of("GMT"));
+        activity2.setStartTime(zdt2);
         activity2 = repository.save(activity2);
 
         Activity activity3 = new Activity();
         activity3.setIdAsString("345345");
         activity3.setDistanceInMeters(9);
-        activity3.setStartTime(ZonedDateTime.of(2014, 1, 1, 10, 0, 1, 0, ZoneId.of("GMT")));
+        ZonedDateTime zdt3 = ZonedDateTime.of(2014, 1, 1, 10, 0, 1, 0, ZoneId.of("GMT"));
+        activity3.setStartTime(zdt3);
         activity3 = repository.save(activity3);
+
+        List zdts = new ArrayList<ZonedDateTime>();
+        zdts.add(zdt1);
+        zdts.add(zdt2);
+        zdts.add(zdt3);
+        Collections.sort(zdts);
+        Assert.assertEquals(zdt1, zdts.get(0));
+        Assert.assertEquals(zdt3, zdts.get(1));
+        Assert.assertEquals(zdt2, zdts.get(2));
 
         Sort sort = new Sort("startTime");
         Iterable<Activity> result = repository.findAll(sort);

@@ -66,24 +66,16 @@ public class Activity {
 
         Activity activity = (Activity) o;
 
-        if (Double.compare(activity.distanceInMeters, distanceInMeters) != 0) return false;
-        if (totalCaloriesBurned != activity.totalCaloriesBurned) return false;
-        if (Double.compare(activity.totalTimeInSeconds, totalTimeInSeconds) != 0) return false;
         if (id != null ? !id.equals(activity.id) : activity.id != null) return false;
+        if (idAsString != null ? !idAsString.equals(activity.idAsString) : activity.idAsString != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = id != null ? id.hashCode() : 0;
-        temp = Double.doubleToLongBits(distanceInMeters);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(totalTimeInSeconds);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + totalCaloriesBurned;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (idAsString != null ? idAsString.hashCode() : 0);
         return result;
     }
 
